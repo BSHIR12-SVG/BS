@@ -1,0 +1,4 @@
+date	size'/'remotesize	flags(request:Update,Range state:File response:Modified,Chunked,gZipped)	statuscode	status ('servermsg')	MIME	Etag|Date	URL	localfile	(from URL)
+02:07:54	17752/17752	---M-Z	200	added ('OK')	text/html	etag:W/%226a8d2f4b-4558%22	https://Bashir.github.io/77/	I:/77/PS4l/77/Bashir.github.io/77/index.html	(from )
+02:07:54	5142/5142	---M-Z	404	error ('Not%20Found')	text/html	etag:W/%226a887015-239b%22	https://Bashir.github.io/robots.txt		(from )
+02:07:58	639241/639241	---M--	200	added ('OK')	image/png	etag:%226a8d2f4b-9c109%22	https://Bashir.github.io/77/preview.png	I:/77/PS4l/77/Bashir.github.io/77/preview.png	(from https://Bashir.github.io/77/)
