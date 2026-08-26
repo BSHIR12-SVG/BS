@@ -1,4 +1,4 @@
-Exploit Host MONTHER SONEEY
+Exploit Host Bashir Ajdabiya
 PS4 Firmwares:  13.00
 
 PS4 Firmwares: 13.00 
