@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html manifest="css.manifest">
+<head>
+    <title>بشير لصيانة الاجهزة الالكترونية والرقمية</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="main-title">
+
+        </h1>
+        <div class="subtitle">بشيرلصيانة الاجهزة الالكترونية والرقمية شارع طرابلس الداخلى اجدابيا</div>
+        <hr class="separator">
+        <div class="status-bar">
+            <span id="msgs" class="status-text loading">⏳...تثبيت ذاكرة التخزين المؤقت</span>
+        </div>
+    </div>
+
+<script>
+history.replaceState(null, null, 'index.html');
+
+function DLProgress(e) {
+    var Percent = Math.round(e.loaded / e.total * 100);
+    window.msgs.innerHTML = '📦تثبيت ذاكرة التخزين المؤقت: ' + Percent + '%';
+}
+
+function DisplayCacheProgress() {
+    window.msgs.innerHTML = '✅ Cache Installed Successfully ✔';
+    window.msgs.className = 'status-text';
+    setTimeout(function() {
+        window.msgs.innerHTML = '🔄 Close and Re-Open Browser...';
+    }, 1500);
+}
+
+window.applicationCache.addEventListener("progress", DLProgress, false);
+window.applicationCache.oncached = function(e) { DisplayCacheProgress(); };
+window.applicationCache.onupdateready = function(e) { DisplayCacheProgress(); };
+window.applicationCache.onerror = function(e) {
+    window.msgs.innerHTML = '❌ Cache Error! Clear and Re-Open...';
+    window.msgs.className = 'status-text error';
+};
+</script>
+</body>
+</html>
