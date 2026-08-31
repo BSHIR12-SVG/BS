@@ -101,7 +101,7 @@
         <h1 class="logo-text">Bashir PS4/PS5</h1>
         <hr>
         <div class="loader-card">
-            <h2 id="msgs"> جارٍ التثبت من برمجيات الجهاز والذاكرة...</h2>
+            <h2 id="msgs">...جارٍي  تثبت  برمجيات الذاكرة</h2>
         </div>
         <a href="https://www.facebook.com/Bshir2015" target="_blank" rel="noopener noreferrer" class="fb-card">
              يسعدنا انضمامكم ومتابعتكم لصفحتي الرسمية على فيسبوك 
@@ -129,7 +129,7 @@
         }
 
         if (!isPS4) {
-            updateMsg(" مخصّص لأجهزة بلاي ستيشن 4 ذات برمجيات النظام من 7.00 إلى 13.00");
+            updateMsg(" مخصّص لأجهزة بلاي ستيشن 4 فقط");
             return;
         }
 
@@ -148,7 +148,7 @@
             }
         } else {
             // تنفيذ الثغرة مباشرة إذا كانت الذاكرة المؤقتة جاهزة ومحفوظة
-            updateMsg(" جارٍ تحميل GoldHEN... يُرجى الانتظار");
+            updateMsg(" ...يُرجى الانتظار GoldHEN جارٍ تحميل ");
             var script = document.createElement('script');
 
             if (fwNum >= 7.00 && fwNum <= 8.52) {
