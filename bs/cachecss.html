@@ -81,7 +81,7 @@
         <hr>
 
         <div class="cache-card">
-            <h2 id="msgs">جاري تحضير ذاكرة التخزين المؤقت...</h2>
+            <h2 id="msgs">جاري تحضير ذاكرة التخزين المؤقت</h2>
             <div class="progress-bar-container">
                 <div class="progress-bar" id="myBar"></div>
             </div>
@@ -90,7 +90,7 @@
 
     <script>
         function goIndex() {
-            document.getElementById("msgs").innerHTML = "جاري التوجيه لصفحة التفعيل...";
+            document.getElementById("msgs").innerHTML = "...جاري التوجيه لصفحة التفعيل  ";
             document.getElementById("msgs").style.color = "#4cd137";
             setTimeout(function() {
                 window.location.href = "index.html";
@@ -104,7 +104,7 @@
                 document.getElementById("msgs").style.color = "#00f2fe";
                 document.getElementById("myBar").style.width = Percent + "%";
             } else {
-                document.getElementById("msgs").innerHTML = "جاري التخزين المؤقت...";
+                document.getElementById("msgs").innerHTML = " ...جاري التخزين المؤقت";
             }
         }
 
@@ -130,7 +130,7 @@
             }, false);
 
             appCache.addEventListener("error", function(e) {
-                // عند فتح الصفحة أوفلاين، سيعطي خطأ اتصال فيتم التوجيه فوراً لـ index.html
+
                 if (!navigator.onLine) {
                     goIndex();
                 } else {
