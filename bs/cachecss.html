@@ -110,47 +110,6 @@
 </head>
 <body>
 
-    <script>
-  
-    history.replaceState(null, null, 'index.html');
-    var histlength = history.length;
-    history.go(-histlength);
-
-    function DLProgress(e) {
-        if (e.total) {
-            var Percent = Math.round((e.loaded / e.total) * 100);
-            document.getElementById("msgs").innerHTML = " التخزين المؤقت: " + Percent + "%";
-            document.getElementById("msgs").style.color = "#00f2fe";
-            document.getElementById("myBar").style.width = Percent + "%";
-        } else {
-            document.getElementById("msgs").innerHTML = " جاري التخزين المؤقت...";
-        }
-    }
-
-    // دالة النجاح والجاهزية للعمل أوفلاين
-    function DisplayCacheProgress() {
-        document.getElementById("myBar").style.width = "100%";
-        document.getElementById("msgs").innerHTML = " تم تثبيت ذاكرة التخزين المؤقت بنجاح";
-        document.getElementById("msgs").style.color = "#4cd137";
-        setTimeout(function() {
-            document.getElementById("msgs").innerHTML = " أغلق متصفحك ثم أعد فتحه الآن (أوفلاين)";
-            document.getElementById("msgs").style.color = "#e6edf3";
-        }, 2500);
-    }
-
-    // ربط مستمعي الأحداث
-    if (window.applicationCache) {
-        window.applicationCache.addEventListener("progress", DLProgress, false);
-        window.applicationCache.oncached = function(e) { DisplayCacheProgress(); };
-        window.applicationCache.onupdateready = function(e) { DisplayCacheProgress(); };
-        window.applicationCache.onerror = function(e) {
-            document.getElementById("msgs").innerHTML = " حدث خطأ أثناء التثبيت! امسح الكاش وأعد فتح المتصفح";
-            document.getElementById("msgs").style.color = "#ff4757";
-            document.getElementById("myBar").style.backgroundColor = "#ff4757";
-        };
-    }
-    </script>
-
     <div class="container">
         <!-- عنوان الموقع -->
         <h1 class="logo-text">Bashir PS4/PS5</h1>
@@ -158,7 +117,7 @@
 
         <!-- بطاقة الكاش مع شريط التقدم -->
         <div class="cache-card">
-            <h2 id="msgs"> بدء تركيب ذاكرة التخزين المؤقت...</h2>
+            <h2 id="msgs">جاري بدء ذاكرة التخزين المؤقت...</h2>
             <div class="progress-bar-container">
                 <div class="progress-bar" id="myBar"></div>
             </div>
@@ -171,6 +130,49 @@
             </a>
         </div>
     </div>
+
+    <script>
+        // تنظيف السجل بدون التسبب في تعليق المتصفح
+        try {
+            history.replaceState(null, null, 'index.html');
+            if (history.length > 1) {
+                history.go(-(history.length - 1));
+            }
+        } catch(e) {}
+
+        function DLProgress(e) {
+            if (e.total) {
+                var Percent = Math.round((e.loaded / e.total) * 100);
+                document.getElementById("msgs").innerHTML = " التخزين المؤقت: " + Percent + "%";
+                document.getElementById("msgs").style.color = "#00f2fe";
+                document.getElementById("myBar").style.width = Percent + "%";
+            } else {
+                document.getElementById("msgs").innerHTML = " جاري التخزين المؤقت...";
+            }
+        }
+
+        function DisplayCacheProgress() {
+            document.getElementById("myBar").style.width = "100%";
+            document.getElementById("msgs").innerHTML = " تم تثبيت ذاكرة التخزين المؤقت بنجاح";
+            document.getElementById("msgs").style.color = "#4cd137";
+            setTimeout(function() {
+                document.getElementById("msgs").innerHTML = " أغلق متصفحك ثم أعد فتحه الآن (أوفلاين)";
+                document.getElementById("msgs").style.color = "#e6edf3";
+            }, 2500);
+        }
+
+        // ربط أحداث applicationCache
+        if (window.applicationCache) {
+            window.applicationCache.addEventListener("progress", DLProgress, false);
+            window.applicationCache.oncached = function(e) { DisplayCacheProgress(); };
+            window.applicationCache.onupdateready = function(e) { DisplayCacheProgress(); };
+            window.applicationCache.onerror = function(e) {
+                document.getElementById("msgs").innerHTML = " حدث خطأ أثناء التثبيت! امسح الكاش وأعد فتح المتصفح";
+                document.getElementById("msgs").style.color = "#ff4757";
+                document.getElementById("myBar").style.background = "#ff4757";
+            };
+        }
+    </script>
 
 </body>
 </html>
