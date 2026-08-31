@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>بشير لصيانة الأجهزة الإلكترونية - تفعيل التعديل</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
-        <style>
+    <style>
         * {
             box-sizing: border-box;
         }
@@ -15,7 +15,7 @@
             margin: 0;
             padding: 0;
             font-family: 'Tajawal', sans-serif;
-               background: linear-gradient(rgba(13, 17, 23, 0.65), rgba(22, 27, 34, 0.65)), url('../image_9nD6e3.png') no-repeat center center fixed;
+            background: linear-gradient(rgba(13, 17, 23, 0.65), rgba(22, 27, 34, 0.65)), url('../image_9nD6e3.png') no-repeat center center fixed;
             background-size: cover;
             color: #ffffff;
             min-height: 100vh;
@@ -96,41 +96,61 @@
     </style>
 </head>
 <body>
-    <script>
-    var uaFull = navigator.userAgent;
-    var match = uaFull.match(/PlayStation 4[ /]([\d.]+)/i);
-    var isPS4 = match !== null;
-    var fwVersion = isPS4 ? match[1] : "Unknown";
-    var fwNum = parseFloat(fwVersion);
 
-    function onScriptError() {
-        var msgs = document.getElementById("msgs");
-        if (msgs) {
-            msgs.innerHTML = " امسح بيانات المتصفح وأعد تثبيت ذاكرة التخزين المؤقت";
-            msgs.style.color = "#ff4757";
+    <div class="container">
+        <h1 class="logo-text">Bashir PS4/PS5</h1>
+        <hr>
+        <div class="loader-card">
+            <h2 id="msgs"> جارٍ التثبت من برمجيات الجهاز والذاكرة...</h2>
+        </div>
+        <a href="https://www.facebook.com/Bshir2015" target="_blank" rel="noopener noreferrer" class="fb-card">
+             يسعدنا انضمامكم ومتابعتكم لصفحتي الرسمية على فيسبوك 
+        </a>
+    </div>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var uaFull = navigator.userAgent;
+        var match = uaFull.match(/PlayStation 4[ /]([\d.]+)/i);
+        var isPS4 = match !== null;
+        var fwVersion = isPS4 ? match[1] : "Unknown";
+        var fwNum = parseFloat(fwVersion);
+
+        function updateMsg(text, color) {
+            var msgs = document.getElementById("msgs");
+            if (msgs) {
+                msgs.innerHTML = text;
+                if (color) msgs.style.color = color;
+            }
         }
-    }
-    if (!isPS4) {
-        document.addEventListener("DOMContentLoaded", function() {
-            document.getElementById("msgs").innerHTML = " مخصّص لأجهزة بلاي ستيشن 4 ذات برمجيات النظام من 9.00 إلى 13.00";
-        });
-    } else {
-        if (window.applicationCache && window.applicationCache.status === 0) {
+
+        function onScriptError() {
+            updateMsg(" امسح بيانات المتصفح وأعد تثبيت ذاكرة التخزين المؤقت", "#ff4757");
+        }
+
+        if (!isPS4) {
+            updateMsg(" مخصّص لأجهزة بلاي ستيشن 4 ذات برمجيات النظام من 7.00 إلى 13.00");
+            return;
+        }
+
+        // توجيه تلقائي لصفحات الكاش إذا لم تكن مخزنة مسبقاً (UNCACHED)
+        if (window.applicationCache && window.applicationCache.status === window.applicationCache.UNCACHED) {
             if (fwNum >= 7.00 && fwNum <= 8.52) {
-                window.location.replace("cache700.html");
+                window.location.href = "cache700.html";
             } else if (fwNum >= 9.00 && fwNum <= 9.60) {
-                window.location.replace("cache900.html");
+                window.location.href = "cache900.html";
             } else if (fwNum >= 10.00 && fwNum <= 11.02) {
-                window.location.replace("cachecss.html");
+                window.location.href = "cachecss.html";
             } else if (fwNum >= 11.50 && fwNum <= 13.00) {
-                window.location.replace("cacheslopkit.html");
+                window.location.href = "cacheslopkit.html";
             } else {
-                document.addEventListener("DOMContentLoaded", function() {
-                    document.getElementById("msgs").innerHTML = 'Unsupported Firmware: <span style="color: #ff4757;">' + fwVersion + '</span>';
-                });
+                updateMsg('نظام غير مدعوم: <span style="color: #ff4757;">' + fwVersion + '</span>');
             }
         } else {
+            // تنفيذ الثغرة مباشرة إذا كانت الذاكرة المؤقتة جاهزة ومحفوظة
+            updateMsg(" جارٍ تحميل GoldHEN... يُرجى الانتظار");
             var script = document.createElement('script');
+
             if (fwNum >= 7.00 && fwNum <= 8.52) {
                 script.type = 'module';
                 script.src = "700/alert.js";
@@ -150,22 +170,15 @@
             } else if (fwNum >= 12.50 && fwNum <= 13.00) {
                 script.type = 'module';
                 script.src = "slopkit/chain_poops.js";
+            } else {
+                updateMsg('نظام غير مدعوم: <span style="color: #ff4757;">' + fwVersion + '</span>');
+                return;
             }
 
             script.onerror = onScriptError;
             document.head.appendChild(script);
         }
-    }
+    });
     </script>
-    <div class="container">
-        <h1 class="logo-text">Bashir PS4/PS5</h1>
-        <hr>
-        <div class="loader-card">
-            <h2 id="msgs"> جارٍ تحميل GoldHEN... يُرجى الانتظار</h2>
-        </div>
-        <a href="https://www.facebook.com/Bshir2015" target="_blank" rel="noopener noreferrer" class="fb-card">
-             يسعدنا انضمامكم ومتابعتكم لصفحتي الرسمية على فيسبوك 
-        </a>
-    </div>
 </body>
 </html>
