@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" manifest="css.manifest">
+<html lang="ar" dir="rtl" manifest="slopkit.manifest">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +9,7 @@
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: system-ui, -apple-system, sans-serif;
             background: #0d1117;
             color: #ffffff;
             min-height: 100vh;
@@ -30,7 +30,10 @@
         h1.logo-text {
             font-size: 2.5rem;
             font-weight: 700;
-            color: #00f2fe;
+            letter-spacing: 1px;
+            background: linear-gradient(45deg, #00f2fe, #4facfe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             margin-bottom: 5px;
         }
 
@@ -42,18 +45,19 @@
         }
 
         .cache-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(0, 242, 254, 0.25);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(0, 242, 254, 0.2);
             padding: 40px 30px;
             border-radius: 16px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
             margin-bottom: 40px;
         }
 
         #msgs {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             font-weight: 500;
             color: #e6edf3;
+            line-height: 1.6;
             margin: 0 0 15px 0;
         }
 
@@ -69,8 +73,27 @@
         .progress-bar {
             width: 0%;
             height: 100%;
-            background: #00f2fe;
+            background: linear-gradient(90deg, #00f2fe, #4facfe);
             transition: width 0.3s ease;
+        }
+
+        .social-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .fb-card {
+            width: 100%;
+            max-width: 400px;
+            padding: 15px;
+            background: rgba(24, 119, 242, 0.1);
+            border: 1px solid rgba(24, 119, 242, 0.3);
+            border-radius: 12px;
+            color: #1877f2;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
         }
     </style>
 </head>
@@ -79,28 +102,34 @@
     <div class="container">
         <h1 class="logo-text">Bashir PS4/PS5</h1>
         <hr>
-
+        
         <div class="cache-card">
-            <h2 id="msgs">جاري تحضير ذاكرة التخزين المؤقت</h2>
+            <h2 id="msgs">... جاري تهيئة التخزين المؤقت</h2>
             <div class="progress-bar-container">
                 <div class="progress-bar" id="myBar"></div>
             </div>
+        </div>
+
+        <div class="social-container">
+            <a href="https://www.facebook.com/Bshir2015" target="_blank" class="fb-card">
+                يسعدنا انضمامكم ومتابعتكم لصفحتي الرسمية على فيسبوك
+            </a>
         </div>
     </div>
 
     <script>
         function goIndex() {
-            document.getElementById("msgs").innerHTML = "...جاري التوجيه لصفحة التفعيل  ";
+            document.getElementById("msgs").innerHTML = "... جاري التوجيه لصفحة التفعيل";
             document.getElementById("msgs").style.color = "#4cd137";
             setTimeout(function() {
                 window.location.href = "index.html";
-            }, 1000);
+            }, 1200);
         }
 
         function DLProgress(e) {
             if (e.lengthComputable && e.total) {
                 var Percent = Math.round((e.loaded / e.total) * 100);
-                document.getElementById("msgs").innerHTML = "التخزين المؤقت: " + Percent + "%";
+                document.getElementById("msgs").innerHTML = "جاري التخزين المؤقت: " + Percent + "%";
                 document.getElementById("msgs").style.color = "#00f2fe";
                 document.getElementById("myBar").style.width = Percent + "%";
             } else {
@@ -110,7 +139,7 @@
 
         function DisplayCacheProgress() {
             document.getElementById("myBar").style.width = "100%";
-            document.getElementById("msgs").innerHTML = "تم التثبيت بنجاح!";
+            document.getElementById("msgs").innerHTML = "تم تثبيت ذاكرة التخزين المؤقت بنجاح!";
             document.getElementById("msgs").style.color = "#4cd137";
             goIndex();
         }
@@ -130,11 +159,10 @@
             }, false);
 
             appCache.addEventListener("error", function(e) {
-
                 if (!navigator.onLine) {
                     goIndex();
                 } else {
-                    document.getElementById("msgs").innerHTML = "حدث خطأ أثناء التثبيت!";
+                    document.getElementById("msgs").innerHTML = "حدث خطأ أثناء التثبيت! امسح الكاش وأعد فتح المتصفح";
                     document.getElementById("msgs").style.color = "#ff4757";
                     document.getElementById("myBar").style.background = "#ff4757";
                 }
@@ -143,6 +171,5 @@
             goIndex();
         }
     </script>
-
 </body>
 </html>
