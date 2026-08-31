@@ -132,16 +132,15 @@
     </div>
 
     <script>
-        // تنظيف السجل بدون التسبب في تعليق المتصفح
+        // تنظيف السجل بشكل آمن دون توجيه عكسي للأنظمة القديمة
         try {
-            history.replaceState(null, null, 'index.html');
-            if (history.length > 1) {
-                history.go(-(history.length - 1));
+            if (window.history && window.history.replaceState) {
+                history.replaceState(null, null, location.pathname);
             }
         } catch(e) {}
 
         function DLProgress(e) {
-            if (e.total) {
+            if (e.lengthComputable && e.total) {
                 var Percent = Math.round((e.loaded / e.total) * 100);
                 document.getElementById("msgs").innerHTML = " التخزين المؤقت: " + Percent + "%";
                 document.getElementById("msgs").style.color = "#00f2fe";
@@ -163,14 +162,21 @@
 
         // ربط أحداث applicationCache
         if (window.applicationCache) {
-            window.applicationCache.addEventListener("progress", DLProgress, false);
-            window.applicationCache.oncached = function(e) { DisplayCacheProgress(); };
-            window.applicationCache.onupdateready = function(e) { DisplayCacheProgress(); };
-            window.applicationCache.onerror = function(e) {
+            var appCache = window.applicationCache;
+            appCache.addEventListener("progress", DLProgress, false);
+            appCache.addEventListener("cached", DisplayCacheProgress, false);
+            appCache.addEventListener("updateready", function(e) {
+                try { appCache.swapCache(); } catch(err) {}
+                DisplayCacheProgress();
+            }, false);
+            appCache.addEventListener("noupdate", function(e) {
+                DisplayCacheProgress();
+            }, false);
+            appCache.addEventListener("error", function(e) {
                 document.getElementById("msgs").innerHTML = " حدث خطأ أثناء التثبيت! امسح الكاش وأعد فتح المتصفح";
                 document.getElementById("msgs").style.color = "#ff4757";
                 document.getElementById("myBar").style.background = "#ff4757";
-            };
+            }, false);
         }
     </script>
 
