@@ -5,15 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>بشير لصيانة الأجهزة الإلكترونية</title>
     
+    <!-- تصحيح روابط خطوط Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    
     <style>
         * {
             box-sizing: border-box;
         }
 
+        /* التنسيق العام وتطبيق صورة الخلفية وتفادي الـ Cache */
         body {
             margin: 0;
             padding: 0;
-            font-family: system-ui, -apple-system, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Tajawal', sans-serif;
+            /* تم إضافة ?v=1.0 لمنع مشاكل الـ Cache */
             background: linear-gradient(rgba(13, 17, 23, 0.6), rgba(22, 27, 34, 0.6)), url('image_9nD6e3.png?v=1.0') no-repeat center center fixed;
             background-size: cover;
             color: #ffffff;
@@ -24,6 +31,7 @@
             justify-content: center;
         }
 
+        /* حاوية التصميم الرئيسية */
         .container {
             width: 100%;
             max-width: 550px;
@@ -31,6 +39,7 @@
             text-align: center;
         }
 
+        /* العنوان الرئيسي */
         h1.logo-text {
             font-size: 2.5rem;
             font-weight: 700;
@@ -48,6 +57,7 @@
             margin-bottom: 30px;
         }
 
+        /* شاشة النص التفاعلي المتحرك */
         .status-screen {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -64,7 +74,7 @@
             transition: all 0.3s ease;
         }
 
-        /* 🔷 تغيير زر التفعيل إلى أزرق كحلي أنيق 🔷 */
+        /* تنسيق الأزرار */
         .custom-btn {
             display: block;
             width: 100%;
@@ -72,14 +82,15 @@
             margin-bottom: 15px;
             font-size: 1.1rem;
             font-weight: 500;
+            font-family: 'Tajawal', sans-serif;
             color: #ffffff;
             text-decoration: none;
-            background: linear-gradient(90deg, #0a192f, #112240, #1e3a8a); /* درجات الكحلي */
+            background: linear-gradient(90deg, #0052d4, #4364f7, #6fb1fc);
             background-size: 200% auto;
-            border: 1px solid #1e40af;
+            border: none;
             border-radius: 12px;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(10, 25, 47, 0.5);
+            box-shadow: 0 4px 15px rgba(67, 100, 247, 0.2);
             transition: all 0.4s ease;
             text-align: center;
         }
@@ -87,8 +98,7 @@
         .custom-btn:hover {
             background-position: right center;
             transform: translateY(-2px);
-            border-color: #3b82f6;
-            box-shadow: 0 6px 20px rgba(30, 58, 138, 0.6);
+            box-shadow: 0 6px 20px rgba(0, 242, 254, 0.4);
         }
 
         .btn-info {
@@ -96,6 +106,7 @@
             border: 1px solid #1f4068;
         }
 
+        /* زر الفيسبوك */
         .fb-card {
             display: block;
             margin-top: 20px;
@@ -114,6 +125,7 @@
             transform: scale(1.02);
         }
 
+        /* بطاقة تفاصيل العنوان والهاتف المخفية */
         #info-card {
             display: none;
             margin-top: 25px;
@@ -122,12 +134,19 @@
             border-radius: 16px;
             padding: 25px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.4s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .info-phone {
             font-size: 1.3rem;
             color: #ff4757;
-            margin: 0 0 10px 0;
+            margin: 0 0 15px 0;
             font-weight: 700;
             direction: ltr;
         }
@@ -144,7 +163,7 @@
         .info-address {
             font-size: 1rem;
             color: #e6edf3;
-            margin: 0 0 15px 0;
+            margin: 0 0 20px 0;
             line-height: 1.6;
         }
 
@@ -155,6 +174,7 @@
             padding: 8px 20px;
             border-radius: 8px;
             cursor: pointer;
+            font-family: 'Tajawal', sans-serif;
             transition: all 0.2s;
         }
 
@@ -168,42 +188,44 @@
 <body>
 
     <div class="container">
-
+        <!-- الشعار والنص العلوي -->
         <h1 class="logo-text">Bashir PS4/PS5</h1>
-        <div class="subtitle">مركز بشير لصيانة وتعديل الأجهزة الإلكترونية والرقمية شارع طرابلس الداخلى اجدابيا</div>
+        <div class="subtitle">مركز بشير لصيانة وتعديل الأجهزة الإلكترونية</div>
 
-        <div id="msgs" class="status-screen">بالجودة بيك يا ثلب في موقعي</div>
+        <!-- شاشة تفاعلية -->
+        <div id="msgs" class="status-screen">مرحباً بك في موقعنا</div>
 
+        <!-- زر التعديل -->
         <a href="bs/index.html" class="custom-btn" 
-           onmouseover="updateMsg('اضغط هنا للبدء في تعديل جهازك الآن')" 
+           onmouseover="updateMsg('🕹️ اضغط هنا للبدء في تعديل جهازك الآن')" 
            onmouseout="resetMsg()">
-            توكل على الله واضغط هنا ان كان إصدار جهازك 9.00 الى 13.00  
+            ابدأ التعديل من 900 - 1300 
         </a>
 
+        <!-- زر رقم الهاتف والعنوان -->
         <button class="custom-btn btn-info" onclick="showInfo()" 
-                onmouseover="updateMsg('اضغط لإظهار رقم هاتف وأوقات عمل بشير')" 
+                onmouseover="updateMsg('📞 اضغط لإظهار رقم الهاتف وتفاصيل الموقع وأوقات العمل')" 
                 onmouseout="resetMsg()">
-            رقم هاتف وعنوان بشير
+            رقم الهاتف والعنوان
         </button>
 
-        <a href="https://www.facebook.com/Bshir2015" target="_blank" class="fb-card">
-            يسعدنا انضمامكم ومتابعتكم لصفحتي الرسمية على فيسبوك 
+        <!-- بطاقة الفيسبوك -->
+        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="fb-card">
+            ✨ يسعدنا انضمامكم ومتابعتكم لصفحتنا الرسمية على فيسبوك ✨
         </a>
 
+        <!-- قسم تفاصيل الهاتف والعنوان المخفي -->
         <div id="info-card">
+            <p class="info-phone">📱 0924844115</p>
             <img src="btc.jpg" class="info-img" alt="شعار المحل">
-            <p class="info-phone">0924844115</p>
-            <p class="info-address">
-                العنوان: شارع طرابلس الداخلي - أجدابيا<br>
-                مواعيد العمل: من الساعة 6:00 مساءً حتى 10:00 مساءً
-            </p>
+            <p class="info-address">📍 العنوان: شارع طرابلس الداخلي - أجدابيا<br>مواعيد العمل: من الساعة 6:00 مساءً حتى 10:00 مساءً</p>
             <button class="close-btn" onclick="hideInfo()">إخفاء التفاصيل</button>
         </div>
     </div>
 
     <script>
-        var defaultMsg = "بالجودة بيك يا ثلب في موقعي";
-        var msgElement = document.getElementById('msgs');
+        const defaultMsg = "مرحباً بك في موقعنا";
+        const msgElement = document.getElementById('msgs');
 
         function updateMsg(text) {
             msgElement.innerHTML = text;
@@ -216,8 +238,9 @@
         }
 
         function showInfo() {
-            var infoCard = document.getElementById("info-card");
+            const infoCard = document.getElementById("info-card");
             infoCard.style.display = "block";
+            infoCard.scrollIntoView({ behavior: 'smooth' });
         }
 
         function hideInfo() {
