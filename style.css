@@ -4,21 +4,20 @@
    ========================================================================== */
 
 html {
-    /* ربط خلفية الموقع الافتراضية بالصورة الجديدة لأعماق البحار */
     background-image: url('image_9nD6e3.png'); 
     background-position: center center;
-    background-size: cover; /* تجعل الصورة تغطي كامل الشاشة بشكل متناسق مع كل الشاشات */
-    background-attachment: fixed; /* تمنع اهتزاز الخلفية عند تحريك القوائم داخل البلايستيشن */
+    background-size: cover;
+    background-attachment: fixed;
     background-repeat: no-repeat;
-    background-color: #0b131a; /* لون احتياطي داكن متناسق مع البحر في حال تأخر تحميل الصورة */
+    background-color: #0b131a;
     color: #e0e6ed;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: system-ui, -apple-system, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     text-align: center;
-    overflow: hidden;
-    height: 100%;
+    overflow-y: auto; /* يسمح بالتمرير إذا كانت الأزرار كثيرة */
+    min-height: 100vh;
 }
 
-/* توهج نيون أزرق فوسفوري متناسق مع أشعة الشمس المخترقة لأعماق البحر في صورتك */
+/* توهج نيون أزرق فوسفوري */
 h1 {
     font-size: 28px;
     color: #ffffff;
@@ -39,9 +38,9 @@ a {
     transition: all 0.3s ease;
 }
 
-/* 💠 زر الثغرة الرئيسي (تم زيادة التباين والزجاجية لتبرز فوق تفاصيل البحر) */
+/* زر الثغرة الرئيسي */
 .btn {
-    background-color: rgba(5, 28, 48, 0.65); /* تأثير زجاجي داكن ممتص للضوء */
+    background-color: rgba(5, 28, 48, 0.65);
     color: #ffffff;
     width: 235px;
     height: 48px;
@@ -63,7 +62,7 @@ a {
     transform: translateY(-2px);
 }
 
-/* 🟢 زر الحفظ والأوفلاين (أخضر نيون متوهج متناسق مع نجاح الكاش) */
+/* زر الحفظ والأوفلاين */
 .btn-onln {
     background-color: rgba(6, 43, 3, 0.6);
     border-color: #4cd137;
@@ -76,7 +75,7 @@ a {
     box-shadow: 0 0 18px #4cd137, 0 0 30px #4cd137;
 }
 
-/* 🔴 زر أدوات النظام (أحمر نيون ناصع للأدوات الحساسة والفشل) */
+/* زر أدوات النظام */
 .btn-toolbox {
     background-color: rgba(54, 12, 5, 0.6);
     border-color: #ff4757;
@@ -89,7 +88,7 @@ a {
     box-shadow: 0 0 18px #ff4757, 0 0 30px #ff4757;
 }
 
-/* ⚪ أزرار دعم الـ PS5 والإصدارات الأخرى */
+/* أزرار دعم الـ PS5 والإصدارات الأخرى */
 .btn-ps5 {
     background-color: rgba(30, 36, 43, 0.65);
     border-color: #a4b0be;
@@ -103,7 +102,7 @@ a {
     box-shadow: 0 0 18px #ffffff, 0 0 30px #ffffff;
 }
 
-/* 📢 شاشة كونسول الملاحظات التي تظهر عليها رسائل الـ GoldHEN */
+/* شاشة كونسول الملاحظات */
 #msgs {
     font-size: 22px;
     font-weight: bold;
