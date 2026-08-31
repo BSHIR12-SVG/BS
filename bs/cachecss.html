@@ -1,184 +1,62 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl" manifest="css.manifest">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بشير لصيانة الأجهزة الإلكترونية - تثبيت الذاكرة المؤقتة</title>
-    
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Tajawal', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(rgba(13, 17, 23, 0.75), rgba(22, 27, 34, 0.75)), url('../image_9nD6e3.png') no-repeat center center fixed;
-            background-size: cover;
-            color: #ffffff;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
+<script>
+    // إذا كان الجهاز أوفلاين أو الكاش مخزن مسبقاً، وجه فوراً لصفحة التفعيل الرئيسية
+    function redirect_to_index() {
+        document.getElementById("msgs").innerHTML = " جاري توجيهك لصفحة التفعيل...";
+        document.getElementById("msgs").style.color = "#4cd137";
+        setTimeout(function() {
+            window.location.href = "index.html";
+        }, 1200);
+    }
+
+    function DLProgress(e) {
+        if (e.lengthComputable && e.total) {
+            var Percent = Math.round((e.loaded / e.total) * 100);
+            document.getElementById("msgs").innerHTML = " التخزين المؤقت: " + Percent + "%";
+            document.getElementById("msgs").style.color = "#00f2fe";
+            document.getElementById("myBar").style.width = Percent + "%";
+        } else {
+            document.getElementById("msgs").innerHTML = " جاري التخزين المؤقت...";
+        }
+    }
+
+    function DisplayCacheProgress() {
+        document.getElementById("myBar").style.width = "100%";
+        document.getElementById("msgs").innerHTML = " تم تثبيت ذاكرة التخزين المؤقت بنجاح!";
+        document.getElementById("msgs").style.color = "#4cd137";
+        redirect_to_index();
+    }
+
+    // ربط أحداث الكاش
+    if (window.applicationCache) {
+        var appCache = window.applicationCache;
+        
+        // إذا لم يكن هناك إنترنت أو تم التخزين سابقاً، وجه لصفحة التفعيل فوراً
+        if (navigator.onLine === false || appCache.status === appCache.IDLE) {
+            redirect_to_index();
         }
 
-        .container {
-            width: 100%;
-            max-width: 600px;
-            padding: 40px 20px;
-            box-sizing: border-box;
-        }
-
-        h1.logo-text {
-            font-size: 2.5rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            background: linear-gradient(45deg, #00f2fe, #4facfe);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 5px;
-        }
-
-        hr {
-            border: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(0, 242, 254, 0.4), transparent);
-            margin: 20px 0 40px 0;
-        }
-
-        .cache-card {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(0, 242, 254, 0.25);
-            padding: 40px 30px;
-            border-radius: 16px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(10px);
-            margin-bottom: 40px;
-            position: relative;
-        }
-
-        #msgs {
-            font-size: 1.4rem;
-            font-weight: 500;
-            color: #e6edf3;
-            line-height: 1.6;
-            margin: 0 0 15px 0;
-        }
-
-        .progress-bar-container {
-            width: 100%;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            overflow: hidden;
-            height: 12px;
-            margin-top: 15px;
-        }
-
-        .progress-bar {
-            width: 0%;
-            height: 100%;
-            background: linear-gradient(90deg, #00f2fe, #4facfe);
-            box-shadow: 0 0 10px #00f2fe;
-            transition: width 0.3s ease;
-        }
-
-        .social-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-        .fb-card {
-            width: 100%;
-            max-width: 400px;
-            padding: 15px;
-            background: rgba(24, 119, 242, 0.12);
-            border: 1px solid rgba(24, 119, 242, 0.35);
-            border-radius: 12px;
-            color: #1877f2;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .fb-card:hover {
-            background: rgba(24, 119, 242, 0.25);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(24, 119, 242, 0.3);
-        }
-    </style>
-</head>
-<body>
-
-    <div class="container">
-        <!-- عنوان الموقع -->
-        <h1 class="logo-text">Bashir PS4/PS5</h1>
-        <hr>
-
-        <!-- بطاقة الكاش مع شريط التقدم -->
-        <div class="cache-card">
-            <h2 id="msgs">جاري بدء ذاكرة التخزين المؤقت...</h2>
-            <div class="progress-bar-container">
-                <div class="progress-bar" id="myBar"></div>
-            </div>
-        </div>
-
-        <!-- رابط الفيسبوك -->
-        <div class="social-container">
-            <a href="https://www.facebook.com/Bshir2015" target="_blank" class="fb-card">
-                 يسعدنا انضمامكم ومتابعتكم لصفحتنا الرسمية على فيسبوك
-            </a>
-        </div>
-    </div>
-
-    <script>
-        // تنظيف السجل بشكل آمن دون توجيه عكسي للأنظمة القديمة
-        try {
-            if (window.history && window.history.replaceState) {
-                history.replaceState(null, null, location.pathname);
-            }
-        } catch(e) {}
-
-        function DLProgress(e) {
-            if (e.lengthComputable && e.total) {
-                var Percent = Math.round((e.loaded / e.total) * 100);
-                document.getElementById("msgs").innerHTML = " التخزين المؤقت: " + Percent + "%";
-                document.getElementById("msgs").style.color = "#00f2fe";
-                document.getElementById("myBar").style.width = Percent + "%";
+        appCache.addEventListener("progress", DLProgress, false);
+        appCache.addEventListener("cached", DisplayCacheProgress, false);
+        appCache.addEventListener("updateready", function(e) {
+            try { appCache.swapCache(); } catch(err) {}
+            DisplayCacheProgress();
+        }, false);
+        
+        appCache.addEventListener("noupdate", function(e) {
+            redirect_to_index();
+        }, false);
+        
+        appCache.addEventListener("error", function(e) {
+            // في حالة الأوفلاين، الخطأ الطبيعي يتحول إلى توجيه لصفحة التفعيل المخزنة
+            if (!navigator.onLine || appCache.status === appCache.CHECKING) {
+                redirect_to_index();
             } else {
-                document.getElementById("msgs").innerHTML = " جاري التخزين المؤقت...";
-            }
-        }
-
-        function DisplayCacheProgress() {
-            document.getElementById("myBar").style.width = "100%";
-            document.getElementById("msgs").innerHTML = " تم تثبيت ذاكرة التخزين المؤقت بنجاح";
-            document.getElementById("msgs").style.color = "#4cd137";
-            setTimeout(function() {
-                document.getElementById("msgs").innerHTML = " أغلق متصفحك ثم أعد فتحه الآن (أوفلاين)";
-                document.getElementById("msgs").style.color = "#e6edf3";
-            }, 2500);
-        }
-
-        // ربط أحداث applicationCache
-        if (window.applicationCache) {
-            var appCache = window.applicationCache;
-            appCache.addEventListener("progress", DLProgress, false);
-            appCache.addEventListener("cached", DisplayCacheProgress, false);
-            appCache.addEventListener("updateready", function(e) {
-                try { appCache.swapCache(); } catch(err) {}
-                DisplayCacheProgress();
-            }, false);
-            appCache.addEventListener("noupdate", function(e) {
-                DisplayCacheProgress();
-            }, false);
-            appCache.addEventListener("error", function(e) {
-                document.getElementById("msgs").innerHTML = " حدث خطأ أثناء التثبيت! امسح الكاش وأعد فتح المتصفح";
+                document.getElementById("msgs").innerHTML = " حدث خطأ أثناء التثبيت! امسح الكاش وأعد المحاولة";
                 document.getElementById("msgs").style.color = "#ff4757";
                 document.getElementById("myBar").style.background = "#ff4757";
-            }, false);
-        }
-    </script>
-
-</body>
-</html>
+            }
+        }, false);
+    } else {
+        redirect_to_index();
+    }
+</script>
