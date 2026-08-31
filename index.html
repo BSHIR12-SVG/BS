@@ -190,41 +190,41 @@
     <div class="container">
         <!-- الشعار والنص العلوي -->
         <h1 class="logo-text">Bashir PS4/PS5</h1>
-        <div class="subtitle">مركز بشير لصيانة وتعديل الأجهزة الإلكترونية</div>
+        <div class="subtitle"> مركز بشير لصيانة وتعديل الأجهزة الإلكترونية والرقمية شارع طرابلس الداخلى اجدابيا </div>
 
         <!-- شاشة تفاعلية -->
-        <div id="msgs" class="status-screen">مرحباً بك في موقعنا</div>
+        <div id="msgs" class="status-screen">مرحباً بك في موقعي</div>
 
         <!-- زر التعديل -->
         <a href="bs/index.html" class="custom-btn" 
-           onmouseover="updateMsg('🕹️ اضغط هنا للبدء في تعديل جهازك الآن')" 
+           onmouseover="updateMsg(' اضغط هنا للبدء في تعديل جهازك الآن')" 
            onmouseout="resetMsg()">
-            ابدأ التعديل من 900 - 1300 
+            ابدأ التعديل من 900 الى 1300 
         </a>
 
         <!-- زر رقم الهاتف والعنوان -->
         <button class="custom-btn btn-info" onclick="showInfo()" 
-                onmouseover="updateMsg('📞 اضغط لإظهار رقم الهاتف وتفاصيل الموقع وأوقات العمل')" 
+                onmouseover="updateMsg(' اضغط لإظهار رقم الهاتف وتفاصيل الموقع وأوقات العمل')" 
                 onmouseout="resetMsg()">
             رقم الهاتف والعنوان
         </button>
 
         <!-- بطاقة الفيسبوك -->
         <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="fb-card">
-            ✨ يسعدنا انضمامكم ومتابعتكم لصفحتنا الرسمية على فيسبوك ✨
+             يسعدنا انضمامكم ومتابعتكم لصفحتنا الرسمية على فيسبوك 
         </a>
 
         <!-- قسم تفاصيل الهاتف والعنوان المخفي -->
         <div id="info-card">
-            <p class="info-phone">📱 0924844115</p>
+            <p class="info-phone"> </p>
             <img src="btc.jpg" class="info-img" alt="شعار المحل">
-            <p class="info-address">📍 العنوان: شارع طرابلس الداخلي - أجدابيا<br>مواعيد العمل: من الساعة 6:00 مساءً حتى 10:00 مساءً</p>
+            <p class="info-address"> العنوان: شارع طرابلس الداخلي - أجدابيا<br>موعيد العمل: من الساعة 6:00 مساءً حتى 10:00 ليلاً.</p><br>0924844115 :رقم الهاتف </p>
             <button class="close-btn" onclick="hideInfo()">إخفاء التفاصيل</button>
         </div>
     </div>
 
     <script>
-        const defaultMsg = "مرحباً بك في موقعنا";
+        const defaultMsg = "مرحباً بك في موقعى";
         const msgElement = document.getElementById('msgs');
 
         function updateMsg(text) {
