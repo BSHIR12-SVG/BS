@@ -101,7 +101,7 @@
         <h1 class="logo-text">Bashir PS4/PS5</h1>
         <hr>
         <div class="loader-card">
-            <h2 id="msgs"> جارٍ التثبت من برمجيات الجهاز والذاكرة...</h2>
+            <h2 id="msgs">...جارٍ التثبت من برمجيات الجهاز والذاكرة</h2>
         </div>
         <a href="https://www.facebook.com/Bshir2015" target="_blank" rel="noopener noreferrer" class="fb-card">
              يسعدنا انضمامكم ومتابعتكم لصفحتي الرسمية على فيسبوك 
@@ -129,12 +129,11 @@
         }
 
         if (!isPS4) {
-            updateMsg(" مخصّص لأجهزة بلاي ستيشن 4 ذات برمجيات النظام من 7.00 إلى 13.00");
+            updateMsg(" مخصّص لأجهزة بلاي ستيشن 4 فقط");
             return;
         }
 
-        // توجيه تلقائي لصفحات الكاش إذا لم تكن مخزنة مسبقاً (UNCACHED)
-        if (window.applicationCache && window.applicationCache.status === window.applicationCache.UNCACHED) {
+              if (window.applicationCache && window.applicationCache.status === window.applicationCache.UNCACHED) {
             if (fwNum >= 7.00 && fwNum <= 8.52) {
                 window.location.href = "cache700.html";
             } else if (fwNum >= 9.00 && fwNum <= 9.60) {
@@ -147,8 +146,7 @@
                 updateMsg('نظام غير مدعوم: <span style="color: #ff4757;">' + fwVersion + '</span>');
             }
         } else {
-            // تنفيذ الثغرة مباشرة إذا كانت الذاكرة المؤقتة جاهزة ومحفوظة
-            updateMsg(" جارٍ تحميل GoldHEN... يُرجى الانتظار");
+            updateMsg(" ...يُرجى الانتظار GoldHEN جارٍ تحميل");
             var script = document.createElement('script');
 
             if (fwNum >= 7.00 && fwNum <= 8.52) {
