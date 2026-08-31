@@ -1,112 +1,92 @@
-/* ==========================================================================
-   Bashir Electronics & Digital Maintenance - Official Neon Sea Theme 2026
-   Tripoli St, Ajdabiya | Contact: 0924844115 | Host: bashir-7.github.io/8
-   ========================================================================== */
-
 html {
-    background-image: url('image_9nD6e3.png'); 
-    background-position: center center;
+    background-image: url('img.jpg');
+    background-position: center;
     background-size: cover;
     background-attachment: fixed;
     background-repeat: no-repeat;
-    background-color: #0b131a;
-    color: #e0e6ed;
-    font-family: system-ui, -apple-system, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #24272b;
+    color: white;
     text-align: center;
-    overflow-y: auto; /* يسمح بالتمرير إذا كانت الأزرار كثيرة */
-    min-height: 100vh;
+    overflow: hidden;
 }
 
-/* توهج نيون أزرق فوسفوري */
 h1 {
-    font-size: 28px;
-    color: #ffffff;
-    font-weight: 700;
-    margin-top: 25px;
-    letter-spacing: 1px;
-    text-shadow: 0 0 12px #00d2ff, 0 0 25px #00d2ff, 0 0 50px #00a8ff;
+    text-shadow: 0.1em 0.1em 0.2em black;
+    font-size: 25px;
+    color: white;
 }
 
 a {
     text-decoration: none;
 }
 
-/* تنسيق حاويات الأزرار والـ Console */
-#progress, #menu, #crypto, #tools, #lnx, #mods {
-    margin: 15px auto;
-    padding: 10px;
-    transition: all 0.3s ease;
+#progress {
+    display: block;
 }
 
-/* زر الثغرة الرئيسي */
+#menu {
+    display: block;
+}
+
+#crypto {
+    display: none;
+}
+
+#tools {
+    display: none;
+}
+
+#lnx {
+    display: none;
+}
+
+#mods {
+    display: none;
+}
+
 .btn {
-    background-color: rgba(5, 28, 48, 0.65);
-    color: #ffffff;
-    width: 235px;
-    height: 48px;
-    font-size: 18px;
-    font-weight: 600;
-    margin: 10px 6px;
-    border: 2px solid #00d2ff;
-    border-radius: 6px;
+    background-color: #003263;
+    color: white;
+    width: 227px;
+    height: 46px;
+    padding-bottom: 5px;
+    text-align: center;
+    font-size: 20px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    margin-left: 5px;
+    margin-right: 5px;
+    border-style: none;
+    transition-duration: 0.4s;
     cursor: pointer;
-    box-shadow: 0 0 10px rgba(0, 210, 255, 0.4), inset 0 0 10px rgba(0, 210, 255, 0.2);
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    outline: none;
+    border-radius: 4px;
 }
 
 .btn:hover {
-    background-color: #00d2ff;
-    color: #051c30;
-    box-shadow: 0 0 18px #00d2ff, 0 0 30px #00d2ff;
-    transform: translateY(-2px);
+    background-color: #0069d9;
 }
 
-/* زر الحفظ والأوفلاين */
 .btn-onln {
-    background-color: rgba(6, 43, 3, 0.6);
-    border-color: #4cd137;
-    box-shadow: 0 0 10px rgba(76, 209, 55, 0.4), inset 0 0 10px rgba(76, 209, 55, 0.2);
+    background-color: #076300;
 }
 
 .btn-onln:hover {
-    background-color: #4cd137;
-    color: #062b03;
-    box-shadow: 0 0 18px #4cd137, 0 0 30px #4cd137;
+    background-color: #18891b;
 }
 
-/* زر أدوات النظام */
 .btn-toolbox {
-    background-color: rgba(54, 12, 5, 0.6);
-    border-color: #ff4757;
-    box-shadow: 0 0 10px rgba(255, 71, 87, 0.4), inset 0 0 10px rgba(255, 71, 87, 0.2);
+    background-color: #ae2301;
 }
 
 .btn-toolbox:hover {
-    background-color: #ff4757;
-    color: #ffffff;
-    box-shadow: 0 0 18px #ff4757, 0 0 30px #ff4757;
+    background-color: #d42a01;
 }
 
-/* أزرار دعم الـ PS5 والإصدارات الأخرى */
 .btn-ps5 {
-    background-color: rgba(30, 36, 43, 0.65);
-    border-color: #a4b0be;
-    box-shadow: 0 0 10px rgba(164, 176, 190, 0.4), inset 0 0 10px rgba(164, 176, 190, 0.2);
+    background-color: #3d3f4e;
 }
 
 .btn-ps5:hover {
-    background-color: #ffffff;
-    color: #1e242b;
-    border-color: #ffffff;
-    box-shadow: 0 0 18px #ffffff, 0 0 30px #ffffff;
-}
-
-/* شاشة كونسول الملاحظات */
-#msgs {
-    font-size: 22px;
-    font-weight: bold;
-    margin: 20px auto;
-    text-shadow: 0 0 10px rgba(255,255,255,0.6);
-    transition: all 0.4s ease;
+    background-color: #c2c2c2;
+    color: #303030;
 }
