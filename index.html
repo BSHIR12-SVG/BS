@@ -10,7 +10,6 @@
             box-sizing: border-box;
         }
 
-        /* خلفية تدرج ناعم أوفلاين بدون أي صور */
         body {
             margin: 0;
             padding: 0;
@@ -26,7 +25,6 @@
             justify-content: center;
         }
 
-        /* حاوية التصميم الرئيسية */
         .container {
             width: 100%;
             max-width: 550px;
@@ -34,7 +32,6 @@
             text-align: center;
         }
 
-        /* العنوان الرئيسي */
         h1.logo-text {
             font-size: 2.5rem;
             font-weight: 700;
@@ -52,7 +49,6 @@
             margin-bottom: 30px;
         }
 
-        /* شاشة النص التفاعلي المتحرك */
         .status-screen {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -69,7 +65,6 @@
             transition: all 0.3s ease;
         }
 
-        /* تنسيق الأزرار */
         .custom-btn {
             display: block;
             width: 100%;
@@ -95,7 +90,6 @@
             box-shadow: 0 6px 20px rgba(0, 242, 254, 0.4);
         }
 
-        /* زر GoldHEN */
         .btn-goldhen {
             background: linear-gradient(90deg, #f12711, #f5af19);
             box-shadow: 0 4px 15px rgba(245, 175, 25, 0.2);
@@ -110,7 +104,6 @@
             border: 1px solid #1f4068;
         }
 
-        /* بطاقة الفيسبوك */
         .fb-card {
             display: block;
             margin-top: 20px;
@@ -129,7 +122,6 @@
             transform: scale(1.02);
         }
 
-        /* بطاقة تفاصيل العنوان والهاتف المخفية */
         #info-card {
             display: none;
             margin-top: 25px;
@@ -182,33 +174,33 @@
 <body>
 
     <div class="container">
-        <!-- الشعار والنص العلوي -->
+        <!--  -->
         <h1 class="logo-text">Bashir PS4/PS5</h1>
         <div class="subtitle"> مركز بشير لصيانة وتعديل الأجهزة الإلكترونية والرقمية شارع طرابلس الداخلي اجدابيا </div>
 
-        <!-- شاشة تفاعلية -->
+        <!--  -->
         <div id="msgs" class="status-screen">مرحباً بك في موقعي</div>
 
-        <!-- زر GoldHEN 7.00 - 13.00 -->
+        <!--  -->
         <a href="b2/index.html" class="custom-btn btn-goldhen" 
            onmouseover="updateMsg('اضغط هنا للبدء في تعديل جهازك الآن')" 
            onmouseout="resetMsg()">
             تعديل جهازك من سوفت 9.00 الى 13.00
         </a>
 
-        <!-- زر رقم الهاتف والعنوان -->
+        <!-- -->
         <button class="custom-btn btn-info" onclick="showInfo()" 
                 onmouseover="updateMsg('اضغط هنا لإظهار رقم هاتف وأوقات عمل بشير')" 
                 onmouseout="resetMsg()">
             رقم هاتف وعنوان بشير
         </button>
 
-        <!-- بطاقة الفيسبوك -->
+        <!-- -->
         <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="fb-card">
             يسعدني انضمامكم ومتابعتكم لصفحتي الرسمية على فيسبوك 
         </a>
 
-        <!-- قسم تفاصيل الهاتف والعنوان المخفي -->
+        <!-- -->
         <div id="info-card">
             <p class="info-address">العنوان: شارع طرابلس الداخلي - أجدابيا<br>مواعيد العمل: من الساعة 6:00 مساءً حتى 10:00 ليلاً.</p>
             <p class="info-phone">0924844115 : رقم الهاتف</p>
