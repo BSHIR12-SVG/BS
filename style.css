@@ -1,4 +1,4 @@
-/* إعدادات الخطوط والخلفية العامة (تدرج أنيق بدون صور) */
+
 html {
     background: radial-gradient(circle at center, #1b2a4a 0%, #0d1117 70%, #05080c 100%);
     background-attachment: fixed;
@@ -6,12 +6,11 @@ html {
     color: #ffffff;
     text-align: center;
     overflow: hidden;
-    direction: rtl; /* ضبط الاتجاه من اليمين إلى اليسار للغة العربية */
+    direction: rtl;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     min-height: 100vh;
 }
 
-/* الترويسة الرئيسية */
 h1 {
     text-shadow: 0.1em 0.1em 0.3em rgba(0, 0, 0, 0.8);
     font-size: 26px;
@@ -21,13 +20,13 @@ h1 {
     font-weight: bold;
 }
 
-/* الروابط */
+
 a {
     text-decoration: none;
     color: inherit;
 }
 
-/* الأقسام القابلة للتبديل */
+
 #progress,
 #menu {
     display: block;
@@ -40,7 +39,7 @@ a {
     display: none;
 }
 
-/* التصميم الأساسي للأزرار */
+
 .btn {
     background-color: #003263;
     color: #ffffff;
@@ -71,7 +70,7 @@ a {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* أزرار الخدمات أونلاين (خضراء) */
+
 .btn-onln {
     background-color: #076300;
 }
@@ -80,7 +79,7 @@ a {
     background-color: #18891b;
 }
 
-/* أزرار أدوات التعديل (حمراء) */
+
 .btn-toolbox {
     background-color: #ae2301;
 }
@@ -89,7 +88,7 @@ a {
     background-color: #d42a01;
 }
 
-/* أزرار وضع PS5 / الأوضاع الخاصة */
+
 .btn-ps5 {
     background-color: #3d3f4e;
 }
@@ -99,7 +98,7 @@ a {
     color: #303030;
 }
 
-/* حاوية الرسائل والسجلات */
+
 #msgs {
     font-size: 20px;
     font-weight: bold;
